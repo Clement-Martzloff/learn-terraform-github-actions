@@ -18,7 +18,7 @@ terraform {
 }
 
 provider "aws" {
-  region = "us-west-1"
+  region = "eu-central-1"
 }
 
 provider "random" {}
@@ -26,7 +26,7 @@ provider "random" {}
 resource "random_pet" "sg" {}
 
 resource "aws_instance" "web" {
-  ami                    = "ami-08d9a394ac1c2994c"
+  ami                    = "ami-0bd39c806c2335b95"
   instance_type          = "t2.micro"
   vpc_security_group_ids = [aws_security_group.web-sg.id]
 
@@ -36,7 +36,6 @@ resource "aws_instance" "web" {
               nohup busybox httpd -f -p 8080 &
               EOF
 }
-
 
 resource "aws_security_group" "web-sg" {
   name = "${random_pet.sg.id}-sg"
