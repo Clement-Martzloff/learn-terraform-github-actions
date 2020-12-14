@@ -38,14 +38,14 @@ resource "aws_instance" "web" {
 }
 
 resource "aws_default_vpc" "default" {
-   tags = {
-     Name = "Default VPC"
-   }
- }
+  tags = {
+    Name = "Default VPC"
+  }
+}
 
 resource "aws_security_group" "web-sg" {
-  vpc_id      = "${aws_default_vpc.default.id}"
-  name = "${random_pet.sg.id}-sg"
+  vpc_id = aws_default_vpc.default.id
+  name   = "${random_pet.sg.id}-sg"
   ingress {
     from_port   = 80
     to_port     = 80
