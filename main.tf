@@ -29,7 +29,7 @@ resource "aws_instance" "web" {
   ami                    = "ami-0bd39c806c2335b95"
   instance_type          = "t2.micro"
   vpc_security_group_ids = [aws_security_group.web-sg.id]
-
+  
   user_data = <<-EOF
               #!/bin/bash
               echo "Hello, World" > index.html
@@ -37,14 +37,8 @@ resource "aws_instance" "web" {
               EOF
 }
 
-resource "aws_default_vpc" "default" {
-  tags = {
-    Name = "Default VPC"
-  }
-}
 
 resource "aws_security_group" "web-sg" {
-  vpc_id = aws_default_vpc.default.id
   name   = "${random_pet.sg.id}-sg"
   ingress {
     from_port   = 80
